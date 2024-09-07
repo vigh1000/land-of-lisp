@@ -1,8 +1,3 @@
-;; (load "graph-util")
-;; (load "C:/Repos/land-of-lisp/GrandTheftWumpus/CongestionCity.lsp")
-
-(load "C:/Repos/land-of-lisp/GraphWiz/graph-util.lsp")
-
 (defparameter *congestion-city-nodes* nil)
 (defparameter *congestion-city-edges* nil)
 (defparameter *visited-nodes* nil)
@@ -10,7 +5,6 @@
 (defparameter *edge-num* 45)
 (defparameter *worm-num* 3)
 (defparameter *cop-odds* 15)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;Generating Random Edges
@@ -131,26 +125,6 @@
                                  '(lights!)))
                           (when (some #'cdr (cdr (assoc n edge-alist)))
                             '(sirens!))))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Initializing a New Game of Grand Theft Wumpus
-(defun new-game ()
-  (setf *congestion-city-edges* (make-city-edges))
-  (setf *congestion-city-nodes* (make-city-nodes *congestion-city-edges*))
-  (setf *player-pos* (find-empty-node))
-  (setf *visited-nodes* (list *player-pos*))
-  (draw-city)
-  (draw-known-city))
-
-(defun find-empty-node ()
-  (let ((x (random-node)))
-    (if (cdr (assoc x *congestion-city-nodes*))
-        (find-empty-node)
-        x)))
-
-(defun draw-city ()
-  (ugraph->png "city" *congestion-city-nodes* *congestion-city-edges*))
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Creaty partially known from players perspective
